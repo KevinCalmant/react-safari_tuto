@@ -1,11 +1,13 @@
-import React from "react";
+import React, { Component } from "react";
 
-const RecipesStart = () => {
-  return (
-    <div>
-      <h3>Please select a recipe!</h3>
-    </div>
-  );
-};
+export class RecipesStart extends Component {
+  render() {
+    return (
+      <div>
+        <h3>Please select a recipe!</h3>
+      </div>
+    );
+  }
+}
 
 export default RecipesStart;
