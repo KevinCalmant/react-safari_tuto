@@ -13,9 +13,9 @@ function App() {
     <Router>
       <div>
         <Header/>
-        <div className="container">
+        <div className="container-fluid content">
           <div className="row">
-            <div className="col-md-12">
+            <div className="col-md-12 ml-5">
               <Switch>
                 <Route exact path="/">
                   <Redirect to="/recipes"/>

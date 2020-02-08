@@ -6,9 +6,7 @@ const Header = () => {
   return (
     <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
       <div className="container-fluid">
-        <div className="navbar-header">
-          <Link className="navbar-brand" to="/">Recipe Book</Link>
-        </div>
+        <Link className="navbar-brand" to="/">Recipe Book</Link>
 
         <div className="collapse navbar-collapse">
           <ul className="navbar-nav mr-auto">

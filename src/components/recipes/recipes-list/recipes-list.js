@@ -9,16 +9,21 @@ export class RecipesList extends Component {
       recipes: [
         {id: 0, name: 'Tasty Schnitzel', description: 'A super-tasty Schnitzel - just awesome!', imagePath: 'https://upload.wikimedia.org/wikipedia/commons/7/72/Schnitzel.JPG', ingredients: []},
         {id: 1, name: 'Big Fat Burger', description: 'Big burger what else ?', imagePath: 'https://komonews.com/resources/media/ef00dd06-fb3a-4dee-9699-f98731cb94b3-large16x9_AP_0910250104103.jpg?1492047825352', ingredients: []}
-      ]
+      ],
+      selectedRecipe: null,
     };
   }
 
   recipesItems() {
     const recipesItem = [];
     this.state.recipes.forEach((recipe, index) => {
-      recipesItem.push(<RecipesItem key={recipe.name} recipe={recipe}/>)
+      recipesItem.push(<RecipesItem key={recipe.name} recipe={recipe} selectedRecipe={this.selectedRecipe.bind(this)}/>)
     });
     return recipesItem;
+  }
+
+  selectedRecipe(value) {
+    this.props.selectedRecipe(value);
   }
 
   render() {

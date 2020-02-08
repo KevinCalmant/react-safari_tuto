@@ -1,8 +1,11 @@
 import React, {Component} from "react";
 
+import './recipes-detail.css';
+
 export class RecipesDetail extends Component {
   constructor(props) {
     super(props);
+    console.log(props);
     this.state = {
       recipe: props.recipe,
     };
@@ -13,7 +16,7 @@ export class RecipesDetail extends Component {
       <div>
         <div className="row">
           <div className="col-xs-12">
-            <img src={this.state.recipe.imagePath} alt={this.state.recipe.name} className="img-responsive recipe__image"/>
+            <img src={this.state.recipe.imagePath} alt={this.state.recipe.name} className="img-responsive recipe__detail__image"/>
           </div>
         </div>
         <div className="row">
