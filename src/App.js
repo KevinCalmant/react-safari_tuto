@@ -8,7 +8,7 @@ import Header from './components/header/header';
 import Recipes from './components/recipes/recipes';
 import ShoppingList from './components/shopping-list/shoppingList';
 
-function App() {
+const App = () => {
   return (
     <Router>
       <div>
@@ -30,6 +30,6 @@ function App() {
       </div>
     </Router>
   );
-}
+};
 
 export default App;
