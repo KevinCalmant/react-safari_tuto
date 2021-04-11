@@ -4,25 +4,25 @@ import { BrowserRouter as Router } from 'react-router-dom';
 
 import './App.css';
 
-import Header from "./components/header/header";
-import Recipes from "./components/recipes/recipes";
-import ShoppingList from "./components/shopping-list/shoppingList";
+import Header from './components/header/header';
+import Recipes from './components/recipes/recipes';
+import ShoppingList from './components/shopping-list/shoppingList';
 
 function App() {
   return (
     <Router>
       <div>
-        <Header/>
-        <div className="container-fluid content">
-          <div className="row">
-            <div className="col-md-12 ml-5">
+        <Header />
+        <div className='container-fluid content'>
+          <div className='row'>
+            <div className='col-md-12 ml-5'>
               <Switch>
-                <Route exact path="/">
-                  <Redirect to="/recipes"/>
+                <Route exact path='/'>
+                  <Redirect to='/recipes' />
                 </Route>
-                <Route path="/recipes" component={Recipes}/>
-                <Route path="/shopping-list" component={ShoppingList}/>
-                <Redirect from='*' to='/'/>
+                <Route path='/recipes' component={Recipes} />
+                <Route path='/shopping-list' component={ShoppingList} />
+                <Redirect from='*' to='/' />
               </Switch>
             </div>
           </div>
