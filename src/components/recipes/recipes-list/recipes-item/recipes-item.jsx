@@ -28,7 +28,7 @@ const RecipesItem = (props) => {
           <img
             src={recipe.imagePath}
             alt={recipe.name}
-            className='img-responsive recipe__image'
+            className='img-responsive recipe-image'
           />
         </span>
       </NavLink>

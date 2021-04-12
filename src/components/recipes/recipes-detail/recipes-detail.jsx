@@ -12,7 +12,7 @@ const RecipesDetail = (props) => {
           <img
             src={recipe.imagePath}
             alt={recipe.name}
-            className='img-responsive recipe__detail__image'
+            className='img-responsive recipe-detail-image'
           />
         </div>
       </div>
