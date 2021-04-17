@@ -1,14 +1,15 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+
 import RecipesItem from './recipes-item/recipes-item';
 
-const RecipesList = (props) => {
+const RecipesList = ({ setSelectedRecipe }) => {
   const [recipes] = React.useState([
     {
       id: 0,
       name: 'Tasty Schnitzel',
       description: 'A super-tasty Schnitzel - just awesome!',
-      imagePath:
-        'https://upload.wikimedia.org/wikipedia/commons/7/72/Schnitzel.JPG',
+      imagePath: 'https://upload.wikimedia.org/wikipedia/commons/7/72/Schnitzel.JPG',
       ingredients: [],
     },
     {
@@ -20,28 +21,30 @@ const RecipesList = (props) => {
       ingredients: [],
     },
   ]);
-  const { setSelectedRecipe } = props;
 
   return (
     <div>
-      <div className='row'>
-        <div className='col-xs-12'>
-          <button className='btn btn-success'>New Recipe</button>
+      <div className="row">
+        <div className="col-xs-12">
+          <button className="btn btn-success" type="button">
+            New Recipe
+          </button>
         </div>
       </div>
       <hr />
-      <div className='row'>
-        <div className='col-xs-12 list-group'>
-          {recipes.map((recipe, index) => (
-            <RecipesItem
-              key={recipe.name}
-              recipe={recipe}
-              setSelectedRecipe={setSelectedRecipe}
-            />
+      <div className="row">
+        <div className="col-xs-12 list-group">
+          {recipes.map((recipe) => (
+            <RecipesItem key={recipe.name} recipe={recipe} setSelectedRecipe={setSelectedRecipe} />
           ))}
         </div>
       </div>
     </div>
   );
 };
+
+RecipesList.propTypes = {
+  setSelectedRecipe: PropTypes.func.isRequired,
+};
+
 export default RecipesList;

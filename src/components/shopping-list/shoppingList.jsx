@@ -1,9 +1,5 @@
-import React from "react";
+import React from 'react';
 
-const ShoppingList = () => {
-  return (
-    <div>Shopping list working!</div>
-  )
-};
+const ShoppingList = () => <div>Shopping list working!</div>;
 
 export default ShoppingList;

@@ -8,28 +8,26 @@ import Header from './components/header/header';
 import Recipes from './components/recipes/recipes';
 import ShoppingList from './components/shopping-list/shoppingList';
 
-const App = () => {
-  return (
-    <Router>
-      <div>
-        <Header />
-        <div className='container-fluid content'>
-          <div className='row'>
-            <div className='col-md-12 ml-5'>
-              <Switch>
-                <Route exact path='/'>
-                  <Redirect to='/recipes' />
-                </Route>
-                <Route path='/recipes' component={Recipes} />
-                <Route path='/shopping-list' component={ShoppingList} />
-                <Redirect from='*' to='/' />
-              </Switch>
-            </div>
+const App = () => (
+  <Router>
+    <div>
+      <Header />
+      <div className="container-fluid content">
+        <div className="row">
+          <div className="col-md-12 ml-5">
+            <Switch>
+              <Route exact path="/">
+                <Redirect to="/recipes" />
+              </Route>
+              <Route path="/recipes" component={Recipes} />
+              <Route path="/shopping-list" component={ShoppingList} />
+              <Redirect from="*" to="/" />
+            </Switch>
           </div>
         </div>
       </div>
-    </Router>
-  );
-};
+    </div>
+  </Router>
+);
 
 export default App;
