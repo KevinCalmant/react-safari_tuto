@@ -2,7 +2,7 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
-import './recipes-item.css';
+import './RecipeItem.css';
 
 const RecipesItem = ({ recipe, setSelectedRecipe }) => {
   const handleRecipeClick = () => {

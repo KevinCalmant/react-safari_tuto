@@ -2,9 +2,9 @@ import React from 'react';
 import { Route } from 'react-router';
 import PropTypes from 'prop-types';
 
-import RecipesList from './recipes-list/recipes-list';
-import RecipesStart from './recipes-start/recipes-start';
-import RecipesDetail from './recipes-detail/recipes-detail';
+import RecipesList from './recipes-list/RecipeList';
+import RecipesDetail from './recipes-detail/RecipeDetail';
+import RecipesStart from './recipes-start/RecipeStart';
 
 const Recipes = ({ match }) => {
   const [path] = React.useState(match.path);

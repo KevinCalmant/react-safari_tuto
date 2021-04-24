@@ -4,9 +4,9 @@ import { BrowserRouter as Router } from 'react-router-dom';
 
 import './App.css';
 
-import Header from './components/header/header';
-import Recipes from './components/recipes/recipes';
-import ShoppingList from './components/shopping-list/shoppingList';
+import Header from './components/header/Header';
+import Recipes from './components/recipes/Recipes';
+import ShoppingList from './components/shopping-list/ShoppingList';
 
 const App = () => (
   <Router>

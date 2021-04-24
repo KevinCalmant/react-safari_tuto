@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import './recipes-detail.css';
+import './RecipeDetail.css';
 
 const RecipesDetail = ({ recipe }) => (
   <div>
