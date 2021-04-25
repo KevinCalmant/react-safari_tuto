@@ -47,6 +47,12 @@ const Recipes = ({ match }) => {
             )}
           />
           <Route
+            path={`${match.path}/:id/edit`}
+            component={() => (
+              <RecipeEdit recipes={recipes} setRecipes={setRecipes} onAddRecipe={onAddRecipe} />
+            )}
+          />
+          <Route
             path={`${match.path}/:id`}
             component={() => <RecipesDetail recipe={selectedRecipe} />}
           />

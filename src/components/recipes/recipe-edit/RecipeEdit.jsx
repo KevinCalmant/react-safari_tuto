@@ -1,9 +1,14 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { useParams } from 'react-router';
+
 import PropTypes from 'prop-types';
 
 import './RecipeEdit.css';
+import recipes from '../recipesData';
 
 const RecipeEdit = ({ onAddRecipe }) => {
+  const params = useParams();
+
   const [recipeFields, setRecipeField] = useState({
     id: null,
     name: '',
@@ -58,6 +63,12 @@ const RecipeEdit = ({ onAddRecipe }) => {
   const onAddClick = () => {
     onAddRecipe(recipeFields);
   };
+
+  useEffect(() => {
+    if (params) {
+      setRecipeField(recipes.find((recipe) => recipe.id === parseInt(params.id, 10)));
+    }
+  }, []);
 
   return (
     <div className="row recipe-edit">
