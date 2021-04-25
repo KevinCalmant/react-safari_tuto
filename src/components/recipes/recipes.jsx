@@ -1,23 +1,56 @@
 import React from 'react';
-import { Route } from 'react-router';
+import { Route, Switch, useHistory } from 'react-router';
 import PropTypes from 'prop-types';
 
 import RecipesList from './recipes-list/RecipeList';
 import RecipesDetail from './recipes-detail/RecipeDetail';
 import RecipesStart from './recipes-start/RecipeStart';
+import RecipeEdit from './recipe-edit/RecipeEdit';
+
+import recipesData from './recipesData';
 
 const Recipes = ({ match }) => {
-  const [path] = React.useState(match.path);
+  const [recipes, setRecipes] = React.useState(recipesData);
+
   const [selectedRecipe, setSelectedRecipe] = React.useState({});
+
+  const history = useHistory();
+
+  const onAddRecipe = (recipe) => {
+    const updatedRecipes = recipes.slice();
+
+    const newRecipe = {
+      ...recipe,
+      id: Math.max(...recipes.map((rec) => rec.id)) + 1,
+    };
+
+    updatedRecipes.push(newRecipe);
+
+    setRecipes(updatedRecipes);
+    setSelectedRecipe(newRecipe);
+
+    history.push(`/recipes/${newRecipe.id}`);
+  };
 
   return (
     <div className="row">
       <div className="col-md-6">
-        <RecipesList setSelectedRecipe={setSelectedRecipe} />
+        <RecipesList recipes={recipes} setSelectedRecipe={setSelectedRecipe} />
       </div>
-      <div className="col-md-6">
-        <Route path={`${path}/:id`} component={() => <RecipesDetail recipe={selectedRecipe} />} />
-        <Route exact path={`${path}`} component={RecipesStart} />
+      <div className="col-md-5">
+        <Switch>
+          <Route exact path={`${match.path}`} component={RecipesStart} />
+          <Route
+            path={`${match.path}/new`}
+            component={() => (
+              <RecipeEdit recipes={recipes} setRecipes={setRecipes} onAddRecipe={onAddRecipe} />
+            )}
+          />
+          <Route
+            path={`${match.path}/:id`}
+            component={() => <RecipesDetail recipe={selectedRecipe} />}
+          />
+        </Switch>
       </div>
     </div>
   );

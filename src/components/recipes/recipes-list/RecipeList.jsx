@@ -1,39 +1,38 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 
 import RecipesItem from './recipes-item/RecipeItem';
 
-import recipesData from './recipes';
-
-const RecipesList = ({ setSelectedRecipe }) => {
-  const [recipes, setRecipes] = React.useState([]);
-
-  useEffect(() => {
-    setRecipes(recipesData);
-  }, []);
-
-  return (
-    <div>
-      <div className="row">
-        <div className="col-xs-12">
-          <button className="btn btn-success" type="button">
-            New Recipe
-          </button>
-        </div>
-      </div>
-      <hr />
-      <div className="row">
-        <div className="col-xs-12 list-group">
-          {recipes.map((recipe) => (
-            <RecipesItem key={recipe.name} recipe={recipe} setSelectedRecipe={setSelectedRecipe} />
-          ))}
-        </div>
+const RecipesList = ({ recipes, setSelectedRecipe }) => (
+  <>
+    <div className="row">
+      <div className="col-xs-12">
+        <Link className="btn btn-success" to="/recipes/new">
+          New Recipe
+        </Link>
       </div>
     </div>
-  );
-};
+    <hr />
+    <div className="row">
+      <div className="col-xs-12 list-group">
+        {recipes.map((recipe) => (
+          <RecipesItem key={recipe.name} recipe={recipe} setSelectedRecipe={setSelectedRecipe} />
+        ))}
+      </div>
+    </div>
+  </>
+);
 
 RecipesList.propTypes = {
+  recipes: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.number,
+      name: PropTypes.string,
+      description: PropTypes.string,
+      imagePath: PropTypes.string,
+    })
+  ).isRequired,
   setSelectedRecipe: PropTypes.func.isRequired,
 };
 

@@ -1,5 +1,5 @@
 import React from 'react';
 
-const ShoppingList = () => <div>Shopping list working!</div>;
+const ShoppingList = () => <>Shopping list working!</>;
 
 export default ShoppingList;

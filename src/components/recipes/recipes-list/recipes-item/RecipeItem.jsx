@@ -10,7 +10,7 @@ const RecipesItem = ({ recipe, setSelectedRecipe }) => {
   };
 
   return (
-    <div>
+    <>
       <NavLink
         activeClassName="active"
         className="list-group-item list-group-item-action flex-column align-items-start clearfix"
@@ -27,7 +27,7 @@ const RecipesItem = ({ recipe, setSelectedRecipe }) => {
           <img src={recipe.imagePath} alt={recipe.name} className="img-responsive recipe-image" />
         </span>
       </NavLink>
-    </div>
+    </>
   );
 };
 

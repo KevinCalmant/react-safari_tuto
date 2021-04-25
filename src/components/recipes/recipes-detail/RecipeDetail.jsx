@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import './RecipeDetail.css';
 
 const RecipesDetail = ({ recipe }) => (
-  <div>
+  <>
     <div className="row">
       <div className="col-xs-12">
         <img
@@ -36,23 +36,30 @@ const RecipesDetail = ({ recipe }) => (
     <div className="row">
       <div className="col-xs-12">{recipe.description}</div>
     </div>
-    <br />
     <div className="row">
       <div className="col-md-6">
         <div className="list-group">
-          <div className="list-group-item">ingredients</div>
+          <div className="list-group-item">
+            {recipe.ingredients?.map((ingredient) => (
+              <li className="list-group-item">{`${ingredient.name} - ${ingredient.amount}`}</li>
+            ))}
+          </div>
         </div>
       </div>
     </div>
-  </div>
+  </>
 );
 
 RecipesDetail.propTypes = {
   recipe: PropTypes.shape({
-    id: PropTypes.number.isRequired,
-    name: PropTypes.string.isRequired,
+    id: PropTypes.number,
+    name: PropTypes.string,
     description: PropTypes.string,
-    imagePath: PropTypes.string.isRequired,
+    imagePath: PropTypes.string,
+    ingredients: PropTypes.arrayOf({
+      name: PropTypes.string,
+      amount: PropTypes.number,
+    }).isRequired,
   }).isRequired,
 };
 

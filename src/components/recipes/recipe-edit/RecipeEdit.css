@@ -1,0 +1,11 @@
+.recipe-image-preview {
+  max-height: 300px;
+}
+
+.recipe-edit label {
+  width: 100px;
+}
+
+.recipe-edit input {
+  width: 300px;
+}

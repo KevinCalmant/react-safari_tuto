@@ -20,6 +20,7 @@
   "rules": {
     "prettier/prettier": "error",
     "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
-    "react/state-in-constructor": "off"
+    "react/state-in-constructor": "off",
+    "jsx-a11y/label-has-associated-control": "off"
   }
 }
