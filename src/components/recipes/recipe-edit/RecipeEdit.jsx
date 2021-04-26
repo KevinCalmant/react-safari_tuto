@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router';
+import { Link } from 'react-router-dom';
 
 import PropTypes from 'prop-types';
 
 import './RecipeEdit.css';
-import recipes from '../recipesData';
 import InputField from './InputField';
 
-const RecipeEdit = ({ onAddRecipe }) => {
+const RecipeEdit = ({ recipes, onAddRecipe }) => {
   const params = useParams();
 
   const [recipeFields, setRecipeField] = useState({
@@ -61,7 +61,7 @@ const RecipeEdit = ({ onAddRecipe }) => {
     });
   };
 
-  const onAddClick = () => {
+  const onAdd = () => {
     onAddRecipe(recipeFields);
   };
 
@@ -76,11 +76,13 @@ const RecipeEdit = ({ onAddRecipe }) => {
       <div className="col-md-12 form-group">
         <div className="row">
           <div className="col-md-12 ml-2 mb-2">
-            <button type="submit" className="btn btn-success" onClick={onAddClick}>
+            <button type="submit" className="btn btn-success" onClick={onAdd}>
               Save
             </button>
             <button type="button" className="btn btn-danger ml-3">
-              cancel
+              <Link className="text-link" to="/recipes">
+                Cancel
+              </Link>
             </button>
           </div>
         </div>
@@ -181,7 +183,25 @@ const RecipeEdit = ({ onAddRecipe }) => {
 };
 
 RecipeEdit.propTypes = {
+  recipes: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.number,
+      name: PropTypes.string,
+      description: PropTypes.string,
+      imagePath: PropTypes.string,
+      ingredients: PropTypes.arrayOf(
+        PropTypes.shape({
+          name: PropTypes.string,
+          amount: PropTypes.string,
+        })
+      ),
+    })
+  ),
   onAddRecipe: PropTypes.func.isRequired,
+};
+
+RecipeEdit.defaultProps = {
+  recipes: [],
 };
 
 export default RecipeEdit;

@@ -19,13 +19,18 @@ const Recipes = ({ match }) => {
   const onAddRecipe = (recipe) => {
     const updatedRecipes = recipes.slice();
 
-    const newRecipe = {
-      ...recipe,
-      id: Math.max(...recipes.map((rec) => rec.id)) + 1,
-    };
+    let newRecipe;
+    if (recipe.id != null) {
+      newRecipe = recipe;
+      updatedRecipes.splice(updatedRecipes.map((rec) => rec.id).indexOf(recipe.id), 1, recipe);
+    } else {
+      newRecipe = {
+        ...recipe,
+        id: Math.max(...recipes.map((rec) => rec.id)) + 1,
+      };
 
-    updatedRecipes.push(newRecipe);
-
+      updatedRecipes.push(newRecipe);
+    }
     setRecipes(updatedRecipes);
     setSelectedRecipe(newRecipe);
 
@@ -42,15 +47,11 @@ const Recipes = ({ match }) => {
           <Route exact path={`${match.path}`} component={RecipesStart} />
           <Route
             path={`${match.path}/new`}
-            component={() => (
-              <RecipeEdit recipes={recipes} setRecipes={setRecipes} onAddRecipe={onAddRecipe} />
-            )}
+            component={() => <RecipeEdit onAddRecipe={onAddRecipe} />}
           />
           <Route
             path={`${match.path}/:id/edit`}
-            component={() => (
-              <RecipeEdit recipes={recipes} setRecipes={setRecipes} onAddRecipe={onAddRecipe} />
-            )}
+            component={() => <RecipeEdit recipes={recipes} onAddRecipe={onAddRecipe} />}
           />
           <Route
             path={`${match.path}/:id`}

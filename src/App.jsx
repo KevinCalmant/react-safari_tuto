@@ -14,7 +14,7 @@ const App = () => (
       <Header />
       <div className="container-fluid content">
         <div className="row">
-          <div className="col-md-12 ml-5">
+          <div className="col-md-12 pl-5">
             <Switch>
               <Route exact path="/">
                 <Redirect to="/recipes" />
