@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+import shortid from 'shortid';
 
 import RecipesItem from './recipes-item/RecipeItem';
 
@@ -17,7 +18,11 @@ const RecipesList = ({ recipes, setSelectedRecipe }) => (
     <div className="row">
       <div className="col-xs-12 list-group">
         {recipes.map((recipe) => (
-          <RecipesItem key={recipe.name} recipe={recipe} setSelectedRecipe={setSelectedRecipe} />
+          <RecipesItem
+            key={shortid.generate()}
+            recipe={recipe}
+            setSelectedRecipe={setSelectedRecipe}
+          />
         ))}
       </div>
     </div>

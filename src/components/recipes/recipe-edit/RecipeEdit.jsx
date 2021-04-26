@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 
 import './RecipeEdit.css';
 import recipes from '../recipesData';
+import InputField from './InputField';
 
 const RecipeEdit = ({ onAddRecipe }) => {
   const params = useParams();
@@ -65,7 +66,7 @@ const RecipeEdit = ({ onAddRecipe }) => {
   };
 
   useEffect(() => {
-    if (params) {
+    if (params?.id) {
       setRecipeField(recipes.find((recipe) => recipe.id === parseInt(params.id, 10)));
     }
   }, []);
@@ -85,30 +86,24 @@ const RecipeEdit = ({ onAddRecipe }) => {
         </div>
         <div className="row">
           <div className="col-md-12 ml-2 mb-2">
-            <div className="form-group">
-              <label htmlFor="name">Name</label>
-              <input
-                name="name"
-                type="text"
-                className="form-contol"
-                value={recipeFields.name}
-                onChange={inputsHandler}
-              />
-            </div>
+            <InputField
+              label="Name"
+              value={recipeFields.name}
+              type="text"
+              name="name"
+              inputsHandler={inputsHandler}
+            />
           </div>
         </div>
         <div className="row">
-          <div className="col-md-11 ml-2">
-            <div className="form-group">
-              <label htmlFor="imagePath">Image URL</label>
-              <input
-                name="imagePath"
-                type="text"
-                className="form-contol"
-                value={recipeFields.imagePath}
-                onChange={inputsHandler}
-              />
-            </div>
+          <div className="col-md-12 ml-2 mb-2">
+            <InputField
+              label="Image"
+              value={recipeFields.imagePath}
+              type="text"
+              name="imagePath"
+              inputsHandler={inputsHandler}
+            />
           </div>
         </div>
         <div className="row">
@@ -144,21 +139,19 @@ const RecipeEdit = ({ onAddRecipe }) => {
             {recipeFields.ingredients.map((ingredient, index) => (
               <div className="row" key={ingredient}>
                 <div className="col-xs-8 ml-2 mt-2">
-                  <input
+                  <InputField
                     name="name"
                     type="text"
-                    className="form-control"
                     value={ingredient.name}
-                    onChange={(event) => inputArrayHandler(event, index)}
+                    inputsHandler={(event) => inputArrayHandler(event, index)}
                   />
                 </div>
                 <div className="col-xs-2 ml-4 mt-2">
-                  <input
+                  <InputField
                     name="amount"
                     type="number"
-                    className="form-control"
                     value={ingredient.amount}
-                    onChange={(event) => inputArrayHandler(event, index)}
+                    inputsHandler={(event) => inputArrayHandler(event, index)}
                   />
                 </div>
                 <div className="col-xs-2 ml-4 mt-2">

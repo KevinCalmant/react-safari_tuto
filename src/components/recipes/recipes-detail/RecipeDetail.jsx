@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+import shortid from 'shortid';
 
 import './RecipeDetail.css';
 import { Link } from 'react-router-dom';
@@ -55,7 +56,10 @@ const RecipesDetail = ({ recipe }) => {
           <div className="list-group">
             <div className="list-group-item">
               {recipe.ingredients?.map((ingredient) => (
-                <li className="list-group-item">{`${ingredient.name} - ${ingredient.amount}`}</li>
+                <li
+                  className="list-group-item"
+                  key={shortid.generate()}
+                >{`${ingredient.name} - ${ingredient.amount}`}</li>
               ))}
             </div>
           </div>
@@ -71,10 +75,12 @@ RecipesDetail.propTypes = {
     name: PropTypes.string,
     description: PropTypes.string,
     imagePath: PropTypes.string,
-    ingredients: PropTypes.arrayOf({
-      name: PropTypes.string,
-      amount: PropTypes.number,
-    }).isRequired,
+    ingredients: PropTypes.arrayOf(
+      PropTypes.shape({
+        name: PropTypes.string,
+        amount: PropTypes.number,
+      })
+    ).isRequired,
   }).isRequired,
 };
 
