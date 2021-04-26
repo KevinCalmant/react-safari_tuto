@@ -5,7 +5,7 @@ import shortid from 'shortid';
 import './RecipeDetail.css';
 import { Link } from 'react-router-dom';
 
-const RecipesDetail = ({ recipe }) => {
+const RecipesDetail = ({ recipe, onRemoveRecipe }) => {
   const [openDropdown, setOpenDropdown] = useState(false);
 
   const onOpenDropdownHandler = () => {
@@ -41,9 +41,13 @@ const RecipesDetail = ({ recipe }) => {
             <ul className={openDropdown ? 'dropdown-menu show' : 'dropdown-menu'}>
               <li className="dropdown-item">To Shopping List</li>
               <li className="dropdown-item">
-                <Link to={`/recipes/${recipe.id}/edit`}>Recipes</Link>
+                <Link to={`/recipes/${recipe.id}/edit`}>Edit Recipe</Link>
               </li>
-              <li className="dropdown-item">Delete Recipe</li>
+              <li className="dropdown-item">
+                <Link onClick={onRemoveRecipe} to="/recipes">
+                  Delete Recipe
+                </Link>
+              </li>
             </ul>
           </div>
         </div>
@@ -82,6 +86,7 @@ RecipesDetail.propTypes = {
       })
     ).isRequired,
   }).isRequired,
+  onRemoveRecipe: PropTypes.func.isRequired,
 };
 
 export default RecipesDetail;

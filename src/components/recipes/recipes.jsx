@@ -37,10 +37,19 @@ const Recipes = ({ match }) => {
     history.push(`/recipes/${newRecipe.id}`);
   };
 
+  const onRemoveRecipe = (recipeId) => {
+    setRecipes(recipes.filter((recipe) => recipe.id !== recipeId));
+    history.push('/recipes');
+  };
+
   return (
     <div className="row">
       <div className="col-md-6">
-        <RecipesList recipes={recipes} setSelectedRecipe={setSelectedRecipe} />
+        <RecipesList
+          recipes={recipes}
+          setSelectedRecipe={setSelectedRecipe}
+          onRemoveRecipe={onRemoveRecipe}
+        />
       </div>
       <div className="col-md-5">
         <Switch>
@@ -55,7 +64,9 @@ const Recipes = ({ match }) => {
           />
           <Route
             path={`${match.path}/:id`}
-            component={() => <RecipesDetail recipe={selectedRecipe} />}
+            component={() => (
+              <RecipesDetail recipe={selectedRecipe} onRemoveRecipe={onRemoveRecipe} />
+            )}
           />
         </Switch>
       </div>
