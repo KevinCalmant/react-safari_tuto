@@ -37,8 +37,8 @@ const Recipes = ({ match }) => {
     history.push(`/recipes/${newRecipe.id}`);
   };
 
-  const onRemoveRecipe = (recipeId) => {
-    setRecipes(recipes.filter((recipe) => recipe.id !== recipeId));
+  const onRemoveRecipe = () => {
+    setRecipes(recipes.filter((recipe) => recipe.id !== selectedRecipe.id));
     history.push('/recipes');
   };
 
