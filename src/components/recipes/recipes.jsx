@@ -7,15 +7,10 @@ import RecipesDetail from './recipes-detail/RecipeDetail';
 import RecipesStart from './recipes-start/RecipeStart';
 import RecipeEdit from './recipe-edit/RecipeEdit';
 
-import recipesData from './recipesData';
-
-const Recipes = ({ match }) => {
-  const [recipes, setRecipes] = React.useState(recipesData);
-
+const Recipes = ({ recipes, setRecipes }) => {
   const [selectedRecipe, setSelectedRecipe] = React.useState({});
 
   const history = useHistory();
-
   const onAddRecipe = (recipe) => {
     const updatedRecipes = recipes.slice();
 
@@ -33,7 +28,6 @@ const Recipes = ({ match }) => {
     }
     setRecipes(updatedRecipes);
     setSelectedRecipe(newRecipe);
-
     history.push(`/recipes/${newRecipe.id}`);
   };
 
@@ -53,17 +47,14 @@ const Recipes = ({ match }) => {
       </div>
       <div className="col-md-5">
         <Switch>
-          <Route exact path={`${match.path}`} component={RecipesStart} />
+          <Route exact path="/recipes" component={RecipesStart} />
+          <Route path="/recipes/new" component={() => <RecipeEdit onAddRecipe={onAddRecipe} />} />
           <Route
-            path={`${match.path}/new`}
-            component={() => <RecipeEdit onAddRecipe={onAddRecipe} />}
-          />
-          <Route
-            path={`${match.path}/:id/edit`}
+            path="/recipes/:id/edit"
             component={() => <RecipeEdit recipes={recipes} onAddRecipe={onAddRecipe} />}
           />
           <Route
-            path={`${match.path}/:id`}
+            path="/recipes/:id"
             component={() => (
               <RecipesDetail recipe={selectedRecipe} onRemoveRecipe={onRemoveRecipe} />
             )}
@@ -75,9 +66,15 @@ const Recipes = ({ match }) => {
 };
 
 Recipes.propTypes = {
-  match: PropTypes.shape({
-    path: PropTypes.string.isRequired,
-  }).isRequired,
+  recipes: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.number,
+      name: PropTypes.string,
+      description: PropTypes.string,
+      imagePath: PropTypes.string,
+    })
+  ).isRequired,
+  setRecipes: PropTypes.func.isRequired,
 };
 
 export default Recipes;
