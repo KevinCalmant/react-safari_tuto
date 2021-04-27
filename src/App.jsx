@@ -5,6 +5,7 @@ import { BrowserRouter as Router } from 'react-router-dom';
 import './App.css';
 
 import Header from './components/header/Header';
+import NotFound from './components/not-found/NotFound';
 import Recipes from './components/recipes/Recipes';
 import ShoppingList from './components/shopping-list/ShoppingList';
 
@@ -21,7 +22,7 @@ const App = () => (
               </Route>
               <Route path="/recipes" component={Recipes} />
               <Route path="/shopping-list" component={ShoppingList} />
-              <Redirect from="*" to="/" />
+              <Route component={NotFound} />
             </Switch>
           </div>
         </div>
