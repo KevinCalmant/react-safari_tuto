@@ -6,6 +6,6 @@
   width: 100px;
 }
 
-.recipe-edit input {
-  width: 300px;
+.ingredients {
+  flex-wrap: nowrap;
 }
