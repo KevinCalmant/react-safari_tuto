@@ -69,7 +69,6 @@ const RecipeEdit = ({ recipes, onAddRecipe }) => {
   };
 
   const validate = () => {
-    console.log(recipeFields);
     setErrors({
       name: recipeFields.name ? null : 'Required',
       imagePath: recipeFields.imagePath ? null : 'Required',
