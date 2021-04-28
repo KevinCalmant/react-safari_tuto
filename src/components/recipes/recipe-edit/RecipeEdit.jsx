@@ -5,7 +5,8 @@ import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 import './RecipeEdit.css';
-import InputField from './InputField';
+import InputField from '../../shared/InputField';
+import TextareaField from '../../shared/TextareaField';
 
 const RecipeEdit = ({ recipes, onAddRecipe }) => {
   const params = useParams();
@@ -16,6 +17,12 @@ const RecipeEdit = ({ recipes, onAddRecipe }) => {
     imagePath: '',
     description: '',
     ingredients: [],
+  });
+
+  const [errors, setErrors] = useState({
+    name: null,
+    imagePath: null,
+    description: null,
   });
 
   const inputsHandler = (event) => {
@@ -61,8 +68,20 @@ const RecipeEdit = ({ recipes, onAddRecipe }) => {
     });
   };
 
+  const validate = () => {
+    console.log(recipeFields);
+    setErrors({
+      name: recipeFields.name ? null : 'Required',
+      imagePath: recipeFields.imagePath ? null : 'Required',
+      description: recipeFields.description ? null : 'Required',
+    });
+    return errors.name == null && errors.imagePath == null && errors.imagePath == null;
+  };
+
   const onAdd = () => {
-    onAddRecipe(recipeFields);
+    if (validate(recipeFields.description)) {
+      onAddRecipe(recipeFields);
+    }
   };
 
   useEffect(() => {
@@ -74,115 +93,119 @@ const RecipeEdit = ({ recipes, onAddRecipe }) => {
   return (
     <div className="row recipe-edit">
       <div className="col-md-12 form-group">
-        <form>
-          <div className="row">
-            <div className="col-md-12 ml-2 mb-2">
-              <button type="submit" className="btn btn-success" onClick={onAdd}>
-                Save
-              </button>
-              <button type="button" className="btn btn-danger ml-3">
-                <Link className="text-link" to="/recipes">
-                  Cancel
-                </Link>
-              </button>
-            </div>
+        <div className="row">
+          <div className="col-md-12 ml-2 mb-2">
+            <button
+              type="submit"
+              className="btn btn-success"
+              onClick={onAdd}
+              disabled={!recipeFields.name && !recipeFields.imagePath && !recipeFields.description}
+            >
+              Save
+            </button>
+            <button type="button" className="btn btn-danger ml-3">
+              <Link className="text-link" to="/recipes">
+                Cancel
+              </Link>
+            </button>
           </div>
-          <div className="row">
-            <div className="col-md-12 ml-2 mb-2">
-              <InputField
-                label="Name"
-                value={recipeFields.name}
+        </div>
+        <div className="row">
+          <div className="col-md-12 ml-2 mb-2">
+            <InputField
+              label="Name"
+              value={recipeFields.name}
+              type="text"
+              name="name"
+              inputsHandler={inputsHandler}
+              error={errors.name}
+              required
+            />
+          </div>
+        </div>
+        <div className="row">
+          <div className="col-md-12 ml-2 mb-2">
+            <InputField
+              label="Image"
+              value={recipeFields.imagePath}
+              type="text"
+              name="imagePath"
+              inputsHandler={inputsHandler}
+              error={errors.imagePath}
+              required
+            />
+          </div>
+        </div>
+        <div className="row">
+          <div className="col-md-11 ml-2 mt-3">
+            {recipeFields.imagePath ? (
+              <img
+                src={recipeFields.imagePath}
+                alt={recipeFields.name}
+                className="img-responsive recipe-image-preview"
+              />
+            ) : (
+              <></>
+            )}
+          </div>
+        </div>
+        <div className="row">
+          <div className="col-md-11 ml-2 mt-3">
+            <div className="form-group">
+              <TextareaField
+                label="Description"
+                value={recipeFields.description}
                 type="text"
-                name="name"
+                name="description"
                 inputsHandler={inputsHandler}
+                error={errors.description}
+                required
               />
             </div>
           </div>
-          <div className="row">
-            <div className="col-md-12 ml-2 mb-2">
-              <InputField
-                label="Image"
-                value={recipeFields.imagePath}
-                type="text"
-                name="imagePath"
-                inputsHandler={inputsHandler}
-              />
-            </div>
-          </div>
-          <div className="row">
-            <div className="col-md-11 ml-2 mt-3">
-              {recipeFields.imagePath ? (
-                <img
-                  src={recipeFields.imagePath}
-                  alt={recipeFields.name}
-                  className="img-responsive recipe-image-preview"
-                />
-              ) : (
-                <></>
-              )}
-            </div>
-          </div>
-          <div className="row">
-            <div className="col-md-11 ml-2 mt-3">
-              <div className="form-group">
-                <label htmlFor="description">Description</label>
-                <textarea
-                  type="text"
-                  name="description"
-                  className="form-control"
-                  rows="6"
-                  value={recipeFields.description}
-                  onChange={inputsHandler}
-                />
-              </div>
-            </div>
-          </div>
-          <div className="row">
-            <div className="col-md-11 ml-3">
-              {recipeFields.ingredients.map((ingredient, index) => (
-                <div className="row ingredients" key={ingredient}>
-                  <div className="col-xs-8 ml-2 mt-2">
-                    <InputField
-                      name="name"
-                      type="text"
-                      value={ingredient.name}
-                      inputsHandler={(event) => inputArrayHandler(event, index)}
-                    />
-                  </div>
-                  <div className="col-xs-2 ml-4 mt-2">
-                    <InputField
-                      name="amount"
-                      type="number"
-                      value={ingredient.amount}
-                      inputsHandler={(event) => inputArrayHandler(event, index)}
-                    />
-                  </div>
-                  <div className="col-xs-2 ml-4 mt-2">
-                    <button
-                      type="button"
-                      className="btn btn-danger"
-                      onClick={() => onRemoveIngredientHandler(index)}
-                    >
-                      X
-                    </button>
-                  </div>
+        </div>
+        <div className="row">
+          <div className="col-md-11 ml-3">
+            {recipeFields.ingredients.map((ingredient, index) => (
+              <div className="row ingredients" key={ingredient}>
+                <div className="col-xs-8 ml-2 mt-2">
+                  <InputField
+                    name="name"
+                    type="text"
+                    value={ingredient.name}
+                    inputsHandler={(event) => inputArrayHandler(event, index)}
+                    required
+                  />
                 </div>
-              ))}
-              <hr />
-              <div className="row">
-                <div className="col-md-11 ml-3">
+                <div className="col-xs-2 ml-4 mt-2">
+                  <InputField
+                    name="amount"
+                    type="number"
+                    value={ingredient.amount}
+                    inputsHandler={(event) => inputArrayHandler(event, index)}
+                  />
+                </div>
+                <div className="col-xs-2 ml-4 mt-2">
                   <button
                     type="button"
-                    className="btn btn-success"
-                    onClick={onAddIngredientsHandler}
+                    className="btn btn-danger"
+                    onClick={() => onRemoveIngredientHandler(index)}
                   >
-                    Add Ingredient
+                    X
                   </button>
                 </div>
               </div>
+            ))}
+            <hr />
+            <div className="row">
+              <div className="col-md-11 ml-3">
+                <button type="button" className="btn btn-success" onClick={onAddIngredientsHandler}>
+                  Add Ingredient
+                </button>
+              </div>
             </div>
           </div>
-        </form>
+        </div>
       </div>
     </div>
   );
