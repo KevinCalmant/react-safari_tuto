@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Route, Switch, useHistory } from 'react-router';
 
-import recipesData from './recipesData';
+import { RecipesContext } from './recipes-context';
 
 import RecipesList from './recipes-list/RecipeList';
 import RecipesDetail from './recipes-detail/RecipeDetail';
@@ -9,8 +9,8 @@ import RecipesStart from './recipes-start/RecipeStart';
 import RecipeEdit from './recipe-edit/RecipeEdit';
 
 const Recipes = () => {
-  const [recipes, setRecipes] = useState(recipesData);
-  const [selectedRecipe, setSelectedRecipe] = React.useState({});
+  const [recipes, setRecipes] = useContext(RecipesContext);
+  const [selectedRecipe, setSelectedRecipe] = useState({});
 
   const history = useHistory();
   const onAddRecipe = (recipe) => {
@@ -44,11 +44,7 @@ const Recipes = () => {
   return (
     <div className="row">
       <div className="col-md-6">
-        <RecipesList
-          recipes={recipes}
-          setSelectedRecipe={setSelectedRecipe}
-          onRemoveRecipe={onRemoveRecipe}
-        />
+        <RecipesList setSelectedRecipe={setSelectedRecipe} onRemoveRecipe={onRemoveRecipe} />
       </div>
       <div className="col-md-5">
         <Switch>
@@ -56,7 +52,7 @@ const Recipes = () => {
           <Route path="/recipes/new" component={() => <RecipeEdit onAddRecipe={onAddRecipe} />} />
           <Route
             path="/recipes/:id/edit"
-            component={() => <RecipeEdit recipes={recipes} onAddRecipe={onAddRecipe} />}
+            component={() => <RecipeEdit onAddRecipe={onAddRecipe} />}
           />
           <Route
             path="/recipes/:id"
