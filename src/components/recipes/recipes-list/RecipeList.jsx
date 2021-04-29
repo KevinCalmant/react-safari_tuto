@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import shortid from 'shortid';
 
 import RecipesItem from './recipes-item/RecipeItem';
-import { RecipesContext } from '../recipes-context';
+import { RecipesContext } from '../RecipesContext';
 
 const RecipesList = ({ setSelectedRecipe }) => {
   const [recipes] = useContext(RecipesContext);

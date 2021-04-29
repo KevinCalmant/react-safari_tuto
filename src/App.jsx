@@ -10,7 +10,7 @@ import Signup from './components/auth/Signup';
 import Header from './components/header/Header';
 import NotFound from './components/not-found/NotFound';
 import Recipes from './components/recipes/Recipes';
-import { RecipesContextProvider } from './components/recipes/recipes-context';
+import { RecipesContextProvider } from './components/recipes/RecipesContext';
 import GlobalSpinner from './components/shared/GlobalSpinner';
 import ShoppingList from './components/shopping-list/ShoppingList';
 import { GlobalSpinnerContextProvider } from './GlobalSpinnerContext';

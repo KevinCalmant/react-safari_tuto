@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { Route, Switch, useHistory } from 'react-router';
 
-import { RecipesContext } from './recipes-context';
+import { RecipesContext } from './RecipesContext';
 
 import RecipesList from './recipes-list/RecipeList';
 import RecipesDetail from './recipes-detail/RecipeDetail';
